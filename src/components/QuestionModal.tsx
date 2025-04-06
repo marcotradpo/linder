@@ -1,22 +1,19 @@
+'use client';
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import { QuestionModalProps } from '@/types';
 
-interface QuestionModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onNext: () => void;
-}
-
-export default function QuestionModal({ isOpen, onClose, onNext }: QuestionModalProps) {
+export default function QuestionModal({ isOpen, onClose, onSubmit }: QuestionModalProps) {
   const [question, setQuestion] = useState('');
-
-  if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onNext();
+    onSubmit(question);
   };
+
+  if (!isOpen) return null;
 
   return (
     <motion.div
@@ -32,35 +29,55 @@ export default function QuestionModal({ isOpen, onClose, onNext }: QuestionModal
         className="bg-white rounded-2xl p-6 max-w-md w-full"
       >
         <div className="text-center">
-          <QuestionMarkCircleIcon className="h-12 w-12 text-blue-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Fai una domanda</h2>
-          <p className="text-gray-600 mb-6">Scrivi una domanda per conoscere meglio la persona</p>
-        </div>
+          <motion.div
+            className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+          >
+            <QuestionMarkCircleIcon className="h-8 w-8 text-primary-500" />
+          </motion.div>
+          <motion.h2
+            className="text-2xl font-bold text-gray-900 mb-2"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            Fai una domanda
+          </motion.h2>
+          <motion.p
+            className="text-gray-600 mb-6"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            Scrivi una domanda per conoscere meglio il profilo
+          </motion.p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <textarea
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Scrivi la tua domanda..."
-            className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 resize-none"
-            required
-          />
-          <div className="flex gap-4">
-            <button
+          <motion.form
+            onSubmit={handleSubmit}
+            className="space-y-4"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <textarea
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Scrivi la tua domanda..."
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 min-h-[100px]"
+              required
+            />
+            <motion.button
               type="submit"
-              className="flex-1 bg-blue-500 text-white py-3 rounded-xl hover:bg-blue-600 transition-colors"
+              className="w-full bg-primary-500 text-white py-2 rounded-lg hover:bg-primary-600 transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               Invia
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 bg-gray-500 text-white py-3 rounded-xl hover:bg-gray-600 transition-colors"
-            >
-              Annulla
-            </button>
-          </div>
-        </form>
+            </motion.button>
+          </motion.form>
+        </div>
       </motion.div>
     </motion.div>
   );

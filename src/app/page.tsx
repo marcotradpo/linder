@@ -3,125 +3,163 @@
 import { useState } from 'react';
 import SwipeCard from '@/components/SwipeCard';
 import NoThanksModal from '@/components/NoThanksModal';
-import YesModal from '@/components/YesModal';
 import QuestionModal from '@/components/QuestionModal';
+import MatchModal from '@/components/MatchModal';
+import QuestionListModal from '@/components/QuestionListModal';
+import InfoModal from '@/components/InfoModal';
 import { motion } from 'framer-motion';
 
-interface Profile {
-  id: number;
-  name: string;
-  age: number;
-  job: string;
-  city: string;
-  origin: string;
-  image: string;
-}
-
-const profiles: Profile[] = [
-  {
-    id: 1,
-    name: "Maria",
-    age: 28,
-    job: "Insegnante",
-    city: "Milano",
-    origin: "Italia",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-  },
-  {
-    id: 2,
-    name: "Giovanni",
-    age: 32,
-    job: "Sviluppatore",
-    city: "Roma",
-    origin: "Italia",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-  },
-  {
-    id: 3,
-    name: "Sophie",
-    age: 25,
-    job: "Designer",
-    city: "Parigi",
-    origin: "Francia",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-  }
-];
-
 export default function Home() {
-  const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
   const [showNoThanksModal, setShowNoThanksModal] = useState(false);
-  const [showYesModal, setShowYesModal] = useState(false);
   const [showQuestionModal, setShowQuestionModal] = useState(false);
-  const [currentProfile, setCurrentProfile] = useState<Profile | null>(null);
+  const [showMatchModal, setShowMatchModal] = useState(false);
+  const [showQuestionList, setShowQuestionList] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const profile = {
+    id: 1,
+    name: 'Profilo',
+    age: 25,
+    job: 'Lavoro',
+    city: 'Città',
+    origin: 'Origine',
+    image: '/profile-default.jpg'
+  };
 
   const handleSwipeLeft = () => {
     setShowNoThanksModal(true);
-    setCurrentProfile(profiles[currentProfileIndex]);
   };
 
   const handleSwipeRight = () => {
-    setShowYesModal(true);
-    setCurrentProfile(profiles[currentProfileIndex]);
+    setShowMatchModal(true);
   };
 
   const handleSwipeUp = () => {
-    setShowQuestionModal(true);
-    setCurrentProfile(profiles[currentProfileIndex]);
+    setShowQuestionList(true);
   };
 
-  const handleNextProfile = () => {
+  const handleShowMatch = () => {
+    setShowQuestionList(false);
     setShowNoThanksModal(false);
-    setShowYesModal(false);
-    setShowQuestionModal(false);
-    setCurrentProfileIndex((prev) => (prev + 1) % profiles.length);
-  };
-
-  const handleCloseModals = () => {
-    setShowNoThanksModal(false);
-    setShowYesModal(false);
-    setShowQuestionModal(false);
+    setShowMatchModal(true);
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gradient-to-b from-pink-100 to-purple-100">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md"
-      >
-        <h1 className="text-4xl font-bold text-center mb-8 text-pink-600">LINDER</h1>
-        
-        {profiles.length > 0 && currentProfileIndex < profiles.length ? (
-          <SwipeCard
-            profile={profiles[currentProfileIndex]}
-            onSwipeLeft={handleSwipeLeft}
-            onSwipeRight={handleSwipeRight}
-            onSwipeUp={handleSwipeUp}
-          />
-        ) : (
-          <div className="text-center text-gray-600">
-            Non ci sono più profili da mostrare
-          </div>
-        )}
+    <main className="min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="text-center mb-8">
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold text-gray-800 mb-6"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          CONOSCIAMOCI DAL VIVO{' '}
+          <motion.span
+            initial={{ rotate: 0 }}
+            animate={{ rotate: [0, -10, 10, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+          >
+            👋
+          </motion.span>{' '}
+          <motion.span
+            initial={{ scale: 1 }}
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 1, repeat: Infinity, repeatDelay: 1.5 }}
+          >
+            🤝
+          </motion.span>{' '}
+          <motion.span
+            initial={{ rotate: 0 }}
+            animate={{ rotate: [0, 15, -15, 15, 0] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 2 }}
+          >
+            😊
+          </motion.span>
+        </motion.h2>
+        <motion.h1
+          className="text-8xl font-bold cursor-pointer"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ 
+            scale: [1, 1.05, 1],
+            opacity: 1 
+          }}
+          transition={{ 
+            scale: {
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            },
+            opacity: {
+              duration: 0.5
+            }
+          }}
+          style={{
+            textShadow: '4px 4px 0px rgba(0,0,0,0.1)',
+            letterSpacing: '0.1em',
+            color: '#FF8A00',
+            filter: 'drop-shadow(2px 2px 4px rgba(255, 138, 0, 0.3))'
+          }}
+          onClick={() => setShowInfoModal(true)}
+        >
+          LINDER
+        </motion.h1>
+      </div>
 
-        <NoThanksModal
-          isOpen={showNoThanksModal}
-          onClose={handleCloseModals}
-          onNext={handleNextProfile}
+      <div className="w-full max-w-md">
+        <SwipeCard
+          profile={profile}
+          onSwipeLeft={handleSwipeLeft}
+          onSwipeRight={handleShowMatch}
+          onSwipeUp={handleSwipeUp}
         />
+      </div>
 
-        <YesModal
-          isOpen={showYesModal}
-          onClose={handleCloseModals}
-          onNext={handleNextProfile}
-        />
+      <NoThanksModal
+        isOpen={showNoThanksModal}
+        onClose={() => setShowNoThanksModal(false)}
+        onNext={handleShowMatch}
+        onShowQuestions={() => setShowQuestionList(true)}
+      />
 
-        <QuestionModal
-          isOpen={showQuestionModal}
-          onClose={handleCloseModals}
-          onNext={handleNextProfile}
-        />
-      </motion.div>
+      <QuestionListModal
+        isOpen={showQuestionList}
+        onClose={() => setShowQuestionList(false)}
+        onNext={handleShowMatch}
+      />
+
+      <MatchModal
+        isOpen={showMatchModal}
+        onClose={() => setShowMatchModal(false)}
+        onNext={() => setShowMatchModal(false)}
+      />
+
+      <InfoModal
+        isOpen={showInfoModal}
+        onClose={() => setShowInfoModal(false)}
+        onNext={() => setShowInfoModal(false)}
+      />
+
+      <footer className="mt-8 text-center text-gray-500">
+        <p>Creata da Marco Orlando</p>
+        <div className="flex justify-center gap-4 mt-2">
+          <a
+            href="https://linkedin.com/in/marcoorlandoitaly/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-500 hover:text-primary-600"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://www.instagram.com/marco_orlando_fisio/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-500 hover:text-primary-600"
+          >
+            Instagram
+          </a>
+        </div>
+      </footer>
     </main>
   );
 } 

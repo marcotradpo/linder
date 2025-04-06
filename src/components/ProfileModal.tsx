@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 interface Profile {
   name: string;
@@ -35,7 +36,14 @@ export default function ProfileModal({ isOpen, onClose, onNext, profile }: Profi
         className="bg-white rounded-2xl p-6 max-w-md w-full"
       >
         <div className="text-center">
-          <SpeakerWaveIcon className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
+          <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+            <Image
+              src={profile.image || "/profile-default.jpg"}
+              alt={`Profilo di ${profile.name}`}
+              fill
+              className="object-cover"
+            />
+          </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Profilo di chi è di fronte a te</h2>
         </div>
 
