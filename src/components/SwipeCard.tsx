@@ -27,13 +27,13 @@ export default function SwipeCard({ profile, onSwipeLeft, onSwipeRight, onSwipeU
       dragConstraints={{ left: 0, right: 0 }}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={handleDragEnd}
-      className="relative bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-[320px] mx-auto"
+      className="relative bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-[380px] sm:max-w-[480px] mx-auto"
       style={{ touchAction: 'none' }}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
       <div className="aspect-[3/4] relative p-2 sm:p-4 pt-4 sm:pt-8 flex items-start justify-center">
-        <div className="w-full max-w-[280px] sm:max-w-[300px] aspect-square relative">
+        <div className="w-full max-w-[280px] sm:max-w-[400px] aspect-square relative">
           <motion.img
             src={profile.image}
             alt="Profile"
@@ -46,14 +46,14 @@ export default function SwipeCard({ profile, onSwipeLeft, onSwipeRight, onSwipeU
       </div>
 
       {!isDragging && (
-        <div className="absolute bottom-4 sm:bottom-12 left-0 right-0 flex justify-center gap-4 sm:gap-8 px-4 sm:px-6">
+        <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 flex justify-center gap-4 sm:gap-8 px-4 sm:px-8">
           <motion.button
             onClick={onSwipeLeft}
-            className="p-3 sm:p-5 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors shadow-lg"
+            className="p-3 sm:p-4 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors shadow-lg"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <XMarkIcon className="h-8 w-8 sm:h-10 sm:w-10" />
+            <XMarkIcon className="h-8 w-8 sm:h-9 sm:w-9" />
           </motion.button>
           <motion.button
             onClick={onSwipeUp}
@@ -66,11 +66,11 @@ export default function SwipeCard({ profile, onSwipeLeft, onSwipeRight, onSwipeU
           </motion.button>
           <motion.button
             onClick={onSwipeRight}
-            className="p-3 sm:p-5 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors shadow-lg"
+            className="p-3 sm:p-4 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors shadow-lg"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <HeartIcon className="h-8 w-8 sm:h-10 sm:w-10" />
+            <HeartIcon className="h-8 w-8 sm:h-9 sm:w-9" />
           </motion.button>
         </div>
       )}
