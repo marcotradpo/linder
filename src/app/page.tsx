@@ -77,7 +77,7 @@ export default function Home() {
           </motion.span>
         </motion.h2>
         <motion.h1
-          className="text-8xl font-bold cursor-pointer"
+          className="text-5xl sm:text-7xl font-bold cursor-pointer"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ 
             scale: [1, 1.05, 1],
