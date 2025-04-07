@@ -45,7 +45,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4">
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#fff4e5]">
       <div className="text-center mb-8">
         <motion.h2
           className="text-4xl md:text-5xl font-bold text-gray-800 mb-6"
@@ -77,7 +77,7 @@ export default function Home() {
           </motion.span>
         </motion.h2>
         <motion.h1
-          className="text-5xl sm:text-7xl font-bold cursor-pointer"
+          className="text-5xl sm:text-7xl font-bold cursor-pointer text-[#FF8A00]"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ 
             scale: [1, 1.05, 1],
@@ -96,7 +96,6 @@ export default function Home() {
           style={{
             textShadow: '4px 4px 0px rgba(0,0,0,0.1)',
             letterSpacing: '0.1em',
-            color: '#FF8A00',
             filter: 'drop-shadow(2px 2px 4px rgba(255, 138, 0, 0.3))'
           }}
           onClick={() => setShowInfoModal(true)}

@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-[#fff4e5]">
         <main className={`${fredoka.className}`}>
           {children}
         </main>
