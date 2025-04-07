@@ -77,14 +77,19 @@ export default function MatchModal({ isOpen, onClose, onNext }: ModalProps) {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <input
-                type="tel"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder="Inserisci il tuo numero"
-                className="w-full px-6 py-4 text-lg border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
-                required
-              />
+              <div className="mt-6">
+                <p className="text-gray-800 mb-4">Inserisci il tuo numero di telefono:</p>
+                <div className="flex items-center">
+                  <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="Inserisci il tuo numero"
+                    className="flex-1 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#FF8A00]"
+                    style={{ color: 'black', WebkitTextFillColor: 'black' }}
+                  />
+                </div>
+              </div>
               <motion.button
                 type="submit"
                 className="w-full bg-primary-500 text-white py-4 rounded-xl text-xl font-semibold hover:bg-primary-600 transition-colors shadow-lg"
