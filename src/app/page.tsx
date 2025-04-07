@@ -171,7 +171,7 @@ export default function Home() {
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="Inserisci il tuo numero"
             className="flex-1 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#FF8A00]"
-            style={{ color: 'black' }}
+            style={{ color: 'black', WebkitTextFillColor: 'black' }}
           />
         </div>
       </div>
