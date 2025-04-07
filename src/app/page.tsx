@@ -15,6 +15,7 @@ export default function Home() {
   const [showMatchModal, setShowMatchModal] = useState(false);
   const [showQuestionList, setShowQuestionList] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const profile = {
     id: 1,
@@ -159,6 +160,20 @@ export default function Home() {
           </a>
         </div>
       </footer>
+
+      <div className="mt-8 text-center text-gray-800">
+        <p>Inserisci il tuo numero di telefono:</p>
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-800">+39</span>
+          <input
+            type="tel"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="Inserisci il tuo numero"
+            className="flex-1 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#FF8A00] text-gray-800"
+          />
+        </div>
+      </div>
     </main>
   );
 } 
